@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="tdd-test" target="26" />
+      <module name="tdd-test.main" target="26" />
+      <module name="tdd-test.test" target="26" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

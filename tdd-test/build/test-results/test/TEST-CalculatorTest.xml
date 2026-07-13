@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="CalculatorTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-07-13T00:23:57.116Z" hostname="PHH-DevC.local" time="0.055">
+  <properties/>
+  <testcase name="plus 함수 구현" classname="CalculatorTest" time="0.018"/>
+  <testcase name="plus 함수 1 + 2 테스트" classname="CalculatorTest" time="0.024"/>
+  <testcase name="plus 함수 4 + 6 테스트" classname="CalculatorTest" time="0.001"/>
+  <testcase name="plus 함수 1 + 4 테스트" classname="CalculatorTest" time="0.001"/>
+  <testcase name="테스트 함수 실행" classname="CalculatorTest" time="0.002"/>
+  <system-out><![CDATA[test1
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
