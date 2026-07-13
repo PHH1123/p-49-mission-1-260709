@@ -1,27 +1,49 @@
 package com.ll;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Calc {
 
+    static int pos = 0;
+
     public static int run(String str) {
-        String[] splitStr = str.split(" ");
+        List<String> strList = Arrays.stream(str.split(" ")).collect(Collectors.toList());
 
         Integer rst = null;
 
-        for (int i=0; i < splitStr.length-2;i+=2) {
-            int num1 = Integer.parseInt(splitStr[i]);
-            int num2 = Integer.parseInt(splitStr[i+2]);
-
-            if (splitStr[i+1].equals("+")) {
-                rst = sum(num1, num2);
-            } else if (splitStr[i+1].equals("-")) {
-                rst = minus(num1, num2);
-            } else if (splitStr[i+1].equals("*")) {
-                rst = mul(num1, num2);
-            }
-            splitStr[i+2] = String.valueOf(rst);
-        }
+        rst = cal(strList);
+        pos = 0;
 
         return rst;
+    }
+
+    private static int cal(List<String> strList) {
+        int num = mul(strList);
+
+        while (pos < strList.size() && ((strList.get(pos).equals("+") || strList.get(pos).equals("-")))) {
+            String oper = strList.get(pos++);
+            System.out.println("pos = " + pos);
+            int next = mul(strList);
+            if (oper.equals("+")) {
+                num = sum(num, next);
+            } else if (oper.equals("-")) {
+                num = minus(num, next);
+            }
+
+        }
+        return num;
+    }
+
+    private static int mul(List<String> strList) {
+        int num = Integer.parseInt(strList.get(pos++));
+        while (pos < strList.size() && strList.get(pos).equals("*")) {
+            pos++;
+            int next = Integer.parseInt(strList.get(pos++));
+            num = mul(num, next);
+        }
+        return num;
     }
 
     private static int sum(int num1, int num2) {
