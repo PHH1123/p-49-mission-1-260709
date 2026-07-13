@@ -15,6 +15,8 @@ public class Calc {
                 rst = sum(num1, num2);
             } else if (splitStr[i+1].equals("-")) {
                 rst = minus(num1, num2);
+            } else if (splitStr[i+1].equals("*")) {
+                rst = mul(num1, num2);
             }
             splitStr[i+2] = String.valueOf(rst);
         }
@@ -28,5 +30,9 @@ public class Calc {
 
     private static int minus(int num1, int num2) {
         return num1 - num2;
+    }
+
+    private static int mul(int num1, int num2) {
+        return num1 * num2;
     }
 }
