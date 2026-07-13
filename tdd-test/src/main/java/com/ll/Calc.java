@@ -9,40 +9,58 @@ public class Calc {
     static int pos = 0;
 
     public static int run(String str) {
-        List<String> strList = Arrays.stream(str.split(" ")).collect(Collectors.toList());
+        str = str.replace("(", " ( ").replace(")", " ) ");
+        List<String> strList = Arrays.stream(str.split(" "))
+                .filter(s -> !s.isEmpty()).collect(Collectors.toList());
 
-        Integer rst = null;
-
-        rst = cal(strList);
         pos = 0;
 
-        return rst;
+        return cal(strList);
+    }
+
+    private static int parent(List<String> strList) {
+        if (strList.get(pos).equals("-")) {
+            pos++;
+            return -parent(strList);
+        }
+
+        if (strList.get(pos).equals("(")) {
+            pos++;
+            int num = cal(strList);
+            pos++;
+            return num;
+        }
+
+        return Integer.parseInt(strList.get(pos++));
     }
 
     private static int cal(List<String> strList) {
         int num = mul(strList);
 
-        while (pos < strList.size() && ((strList.get(pos).equals("+") || strList.get(pos).equals("-")))) {
+        while (pos < strList.size() && (strList.get(pos).equals("+") || strList.get(pos).equals("-"))) {
             String oper = strList.get(pos++);
-            System.out.println("pos = " + pos);
+
             int next = mul(strList);
+
             if (oper.equals("+")) {
                 num = sum(num, next);
             } else if (oper.equals("-")) {
                 num = minus(num, next);
             }
-
         }
+
         return num;
     }
 
     private static int mul(List<String> strList) {
-        int num = Integer.parseInt(strList.get(pos++));
+        int num = parent(strList);
+
         while (pos < strList.size() && strList.get(pos).equals("*")) {
             pos++;
-            int next = Integer.parseInt(strList.get(pos++));
+            int next = parent(strList);
             num = mul(num, next);
         }
+
         return num;
     }
 
